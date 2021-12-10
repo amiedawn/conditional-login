@@ -3,25 +3,18 @@ import React, { useState } from "react";
 
 function LoginForm({ Login, error }) {
   const [formState, setFormState] = useState({ username: "", password: "" });
-  //  const [login, { error }] = useMutation(LOGIN);
 
   const handleFormSubmit = (event) => {
     event.preventDefault();
     Login(formState);
+
   };
 
-  // const handleChange = (event) => {
-  //   const { name, value } = event.target;
-  //   setFormState({
-  //     ...formState,
-  //     [name]: value,
-  //   });
-  // };
 
   return (
     <form className="form-container" onSubmit={handleFormSubmit}>
       <div className="form-group">
-        {/* error */}
+        {(error !== "") ? (<div className="error">{error}</div>) : ""}
         <div className="input-field">
           <label htmlFor="username">Username: </label>
           <input
@@ -33,7 +26,6 @@ function LoginForm({ Login, error }) {
             }
             value={formState.username}
           />
-          {/* <input name="username" type="text" id="username" onChange={handleChange} /> */}
         </div>
         <div className="input-field">
           <label htmlFor="password">Password: </label>
@@ -48,7 +40,9 @@ function LoginForm({ Login, error }) {
           />
           {/* <input name="password" type="password" id="pwd" onChange={handleChange} /> */}
         </div>
-        <input type="submit" value="Login" />
+        <input type="submit" value="Login" 
+          
+        />
       </div>
     </form>
   );

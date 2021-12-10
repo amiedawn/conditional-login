@@ -1,49 +1,57 @@
-import './App.css';
-import React, {useState} from "react";
-// import { BrowserRouter, Link, Route, Routes} from 'react-router-dom';
-import LoginForm from "./components/Login";
-// import Success from './components/success/Success';
-// import Failure from './components/failure/Failure';
+import "./App.css";
+import React, { useState } from "react";
+import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
+import LoginForm from "./components/LoginForm";
+import Success from "./components/success/Success";
+import Failure from "./components/failure/Failure";
 
 function App() {
   const userMatch = {
-    username: "testuser", 
-    password: "password123"
-  }
+    username: "testuser",
+    password: "password123",
+  };
 
-  const [user, setUser] = useState({username: "", password: ""});
+  const [user, setUser] = useState({ username: "" });
   const [error, setError] = useState("");
 
-  const Login = data => {
+  const Login = (data) => {
     console.log(data);
 
-    if (data.username === userMatch.username && data.password === userMatch.password) {
-      console.log("Logged in");
+    if (
+      data.username === userMatch.username &&
+      data.password === userMatch.password
+    ) {
+      setUser({
+        username: data.username,
+      });
     } else {
-      console.log("invalid credentials");
+      setError("invalid credentials");
     }
-  }
+  };
 
-  return(
+  return (
     <div className="App">
-      {(user.username !== "" && user.password !=="") ? (
-        <div className="success"> 
-          <h2>Success! Your login credentials are a match, <span>{user.username}</span>!</h2>
-          <button>Logout</button>
-        </div>  
+      {/* from Mahendra start */}
+      {/* <Switch>
+        <Route exact path="/login" component={Login} />
+        <Route exact path="/signup" component={SignUp} />
+        {this.state.authenticated && (
+          <Route exact path="/Welcome" component={Welcome} />
+        )}
+      </Switch> */}
+      {/* from Mahendra end */}
+
+      {user.username !== "" && user.password !== "" ? (
+        <div className="welcome">
+          <h2>login successful</h2>
+        </div>
       ) : (
-        <LoginForm Login={Login} error={error}/>
+        <LoginForm Login={Login} error={error} />
       )}
-      {/* <BrowserRouter>
-        <Routes>
-          <Route path="/success" element={<Success />}></Route>
-          <Route path="/failure" element={<Failure />}></Route>
-        </Routes>
-      </BrowserRouter>
-     <Login /> */}
+      {/* </Routes>
+      </BrowserRouter> */}
     </div>
   );
 }
 
 export default App;
- 
