@@ -1,11 +1,9 @@
 import "./App.css";
 import React, { useState } from "react";
-import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
 import LoginForm from "./components/LoginForm";
-import Success from "./components/success/Success";
-import Failure from "./components/failure/Failure";
 
-function App() {
+
+export default function App() {
   const userMatch = {
     username: "testuser",
     password: "password123",
@@ -13,10 +11,12 @@ function App() {
 
   const [user, setUser] = useState({ username: "" });
   const [error, setError] = useState("");
+ var isValid = false;
+ var path = "";
 
-  const Login = (data) => {
+  const match = (data) => {
     console.log(data);
-
+   
     if (
       data.username === userMatch.username &&
       data.password === userMatch.password
@@ -24,34 +24,23 @@ function App() {
       setUser({
         username: data.username,
       });
+      isValid = true;
+      path = "/success";
+      console.log("isValid: ", isValid);
+      console.log("path: ", path);
+     
     } else {
-      setError("invalid credentials");
+      setError("");
+      isValid = false;
+      path = "/failure";
+      console.log("isValid: ", isValid);
+      console.log("path: ", path);
+      
     }
+    return isValid;
   };
 
   return (
-    <div className="App">
-      {/* from Mahendra start */}
-      {/* <Switch>
-        <Route exact path="/login" component={Login} />
-        <Route exact path="/signup" component={SignUp} />
-        {this.state.authenticated && (
-          <Route exact path="/Welcome" component={Welcome} />
-        )}
-      </Switch> */}
-      {/* from Mahendra end */}
-
-      {user.username !== "" && user.password !== "" ? (
-        <div className="welcome">
-          <h2>login successful</h2>
-        </div>
-      ) : (
-        <LoginForm Login={Login} error={error} />
-      )}
-      {/* </Routes>
-      </BrowserRouter> */}
-    </div>
+    <LoginForm match={match} error={error} isValid={isValid} path={path} />
   );
-}
-
-export default App;
+};
