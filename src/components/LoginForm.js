@@ -6,9 +6,9 @@ function LoginForm() {
   const handleFormSubmit = (event) => {
     event.preventDefault();
   
-    if ( event.username === "testuser" && event.password ==="password" ) {
+    if ( event.username === "testuser" && event.password === "password" ) {
     navigate("/success");
-    } else {
+    } else if ( event.username !== "testuser" || event.password !== "password" ) {
     navigate("/failure");
     }
   };
@@ -16,15 +16,15 @@ function LoginForm() {
   return (
     <form className="form-container" onSubmit={handleFormSubmit}>
       <div className="form-group">
-        <div className="input-field">
+        <div className="input-field form-control">
           <label htmlFor="username">Username: </label>
           <input name="username" type="text" id="username" />
         </div>
-        <div className="input-field">
+        <div className="input-field form-control">
           <label htmlFor="password">Password: </label>
           <input name="password" type="password" id="password" />
         </div>
-        <input type="submit" value="Login" onSubmit={handleFormSubmit} />
+        <button type="submit" className="btn btn-warning" onSubmit={handleFormSubmit}>Login</button>
       </div>
     </form>
   );
