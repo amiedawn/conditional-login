@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Success from "./success/Success";
-import Failure from "./failure/Failure";
+// import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+// import Success from "./pages/Success";
+// import Failure from "./pages/Failure";
 
 function LoginForm({ match, error, isValid, path }) {
   const [formState, setFormState] = useState({ username: "", password: "" });
@@ -41,12 +41,35 @@ function LoginForm({ match, error, isValid, path }) {
         </div>
         <input type="submit" value="Login" />
       </div>
-      <Router>
+
+      {/* <Router>
+        <nav>
+          <ul>
+            <li>
+              <Link to="/">Home</Link>
+            </li>
+            <li>
+              <Link to={`/pages/${path}`}>Failure</Link>
+            </li>
+            <li>
+              <Link to={`/pages/${path}`}>Success</Link>
+            </li>
+          </ul>
+        </nav>
         <Routes>
-          {!isValid && <Route exact path="/" element={<Failure />} />}
-          {isValid && <Route exact path="/success" element={<Success />} />}
+          {/* {!isValid && <Route path="/" element={<LoginForm />} />}  */}
+          {/* {
+            (isValid = "false" && (
+              <Route path={`/pages/${path}`} element={<Failure />} />
+            ))
+          }
+          {
+            (isValid = "true" && (
+              <Route path={`/pages/${path}`} element={<Success />} />
+            ))
+          }
         </Routes>
-      </Router>
+      </Router> */}
     </form>
   );
 }
