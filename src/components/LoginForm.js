@@ -1,77 +1,33 @@
-import React, { useState } from "react";
-// import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
-// import Success from "./pages/Success";
-// import Failure from "./pages/Failure";
+import React from "react";
+import {useNavigate} from 'react-router-dom';
 
-function LoginForm({ match, error, isValid, path }) {
-  const [formState, setFormState] = useState({ username: "", password: "" });
-
+function LoginForm() {
+  let navigate = useNavigate();
   const handleFormSubmit = (event) => {
     event.preventDefault();
-   match(formState);
+  
+    if ( event.username === "testuser" && event.password ==="password" ) {
+    navigate("/success");
+    } else {
+    navigate("/failure");
+    }
   };
 
   return (
     <form className="form-container" onSubmit={handleFormSubmit}>
       <div className="form-group">
-        {error !== "" ? <div className="error">{error}</div> : ""}
         <div className="input-field">
           <label htmlFor="username">Username: </label>
-          <input
-            name="username"
-            type="text"
-            id="username"
-            onChange={(e) =>
-              setFormState({ ...formState, username: e.target.value })
-            }
-            value={formState.username}
-          />
+          <input name="username" type="text" id="username" />
         </div>
         <div className="input-field">
           <label htmlFor="password">Password: </label>
-          <input
-            name="password"
-            type="password"
-            id="password"
-            onChange={(e) =>
-              setFormState({ ...formState, password: e.target.value })
-            }
-            value={formState.password}
-          />
+          <input name="password" type="password" id="password" />
         </div>
-        <input type="submit" value="Login" />
+        <input type="submit" value="Login" onSubmit={handleFormSubmit} />
       </div>
-
-      {/* <Router>
-        <nav>
-          <ul>
-            <li>
-              <Link to="/">Home</Link>
-            </li>
-            <li>
-              <Link to={`/pages/${path}`}>Failure</Link>
-            </li>
-            <li>
-              <Link to={`/pages/${path}`}>Success</Link>
-            </li>
-          </ul>
-        </nav>
-        <Routes>
-          {/* {!isValid && <Route path="/" element={<LoginForm />} />}  */}
-          {/* {
-            (isValid = "false" && (
-              <Route path={`/pages/${path}`} element={<Failure />} />
-            ))
-          }
-          {
-            (isValid = "true" && (
-              <Route path={`/pages/${path}`} element={<Success />} />
-            ))
-          }
-        </Routes>
-      </Router> */}
     </form>
   );
-}
+};
 
 export default LoginForm;

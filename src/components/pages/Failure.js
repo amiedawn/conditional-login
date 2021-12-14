@@ -6,6 +6,6 @@ function Failure(props) {
       <h2>Login credentials incorrect!</h2>
     </div>
   );
-}
+};
 
 export default Failure;

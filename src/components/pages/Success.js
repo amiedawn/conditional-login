@@ -6,6 +6,6 @@ function Success(props) {
       <h2>Success! Your login credentials are a match!</h2>
     </div>
   );
-}
+};
 
 export default Success;
