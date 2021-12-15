@@ -2,13 +2,13 @@ import React from "react";
 import {useNavigate} from 'react-router-dom';
 
 function LoginForm() {
-  let navigate = useNavigate();
+  const navigate = useNavigate();
   const handleFormSubmit = (event) => {
     event.preventDefault();
   
-    if ( event.username === "testuser" && event.password === "password" ) {
+    if ( event.target.elements.username.value === "testuser" && event.target.elements.password.value === "password" ) {
     navigate("/success");
-    } else if ( event.username !== "testuser" || event.password !== "password" ) {
+    } else {
     navigate("/failure");
     }
   };
@@ -24,7 +24,7 @@ function LoginForm() {
           <label htmlFor="password">Password: </label>
           <input name="password" type="password" id="password" />
         </div>
-        <button type="submit" className="btn btn-warning" onSubmit={handleFormSubmit}>Login</button>
+        <button type="submit" className="btn btn-warning">Login</button>
       </div>
     </form>
   );
